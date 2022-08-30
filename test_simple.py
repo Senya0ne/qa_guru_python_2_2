@@ -1,6 +1,7 @@
 from selene.support.shared import browser
 from selene import be, have
 import pytest
+import uuid
 
 
 @pytest.fixture()
@@ -16,6 +17,7 @@ def test_google_finds_selene_successful(setup_responsive_for_window):
 
 
 def test_google_finds_selene_unsuccessful():
+    uid = uuid.uuid4()
     browser.open('https://google.com')
-    browser.element('[name="q"]').should(be.blank).type('selene').press_enter()
-    browser.element('[id="search"]').should(have.no.text('Selenide - User-oriented Web UI browser tests in Python'))
+    browser.element('[name="q"]').should(be.blank).type(f'{uid}').press_enter()
+    browser.element('[id="center_col"]').should(have.text(f'По запросу {uid} ничего не найдено. '))
