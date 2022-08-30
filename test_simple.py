@@ -16,7 +16,7 @@ def test_google_finds_selene_successful(setup_responsive_for_window):
     browser.element('[id="search"]').should(have.text('User-oriented Web UI browser tests in Python'))
 
 
-def test_google_finds_selene_unsuccessful():
+def test_google_find_unsuccessful():
     uid = uuid.uuid4()
     browser.open('https://google.com')
     browser.element('[name="q"]').should(be.blank).type(f'{uid}').press_enter()
